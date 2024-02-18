@@ -40,8 +40,29 @@ def common_price(m, n, s, l):
 # Бонусом - с правильным возвратом мы ещё получим обьяснение в консоль почему это не треугольник. 
  
  
+import math
+
 def triangle(a, b, c): 
-    return False 
+    a = float(a)
+    b = float(b)
+    c = float(c)
+    if a + b > c and a + c > b and b + c > a:
+        p = (a + b + c) / 2   
+        square = math.sqrt(p * (p - a) * (p - b) * (p - c))
+        res = round(square, 4)
+        return res
+    else:
+        return False
+
+a = input("Введите сторону a: ")
+b = input("Введите сторону b: ")
+c = input("Введите сторону c: ")
+result = triangle(a, b, c)
+if result:
+    print("Площадь треугольника:", result)
+else:
+    print("Треугольник с такими сторонами не существует. Так как значения не соответствуют условию a + b > c, a + c > b и b + c > a")
+
  
  
 # Найти самое длинное слово в введенном предложении. 
@@ -54,11 +75,41 @@ def longest_word(sentence):
  
 # Вводится строка. Требуется удалить из нее повторяющиеся символы и все пробелы. 
 # Например, если было введено "abc cde def", то должно быть выведено "abcdef". 
-def uniques(repeating_string): 
-    return False 
- 
+def uniques(repeating_string):
+    povtor = " "
+    for char in repeating_string:
+        if char not in povtor and char != " ":
+            povtor += char
+    return povtor
+
+repeating_string = input("Введите строку: ")
+result = uniques(repeating_string)
+print(result)
+
  
 # Посчитать количество строчных (маленьких) и прописных (больших) букв в введенной строке. 
 # Проверка рассчитана только на английские буквы. 
-def count_string_capitalization(mixed_string): 
-    return False
+import re
+
+mixed_string = input("Введите строку на английском языке: ")
+
+if re.search('^[a-zA-Z{}]+$', mixed_string):
+    result = count_string_capitalization(mixed_string)
+    if result:
+        print("Количество строчных букв:", result[0])
+        print("Количество прописных букв:", result[1])
+else:
+    print("Введенная строка состоит не из английских букв")
+
+def count_string_capitalization(mixed_string):
+    lower_count = 0
+    upper_count = 0
+
+    for char in mixed_string:
+        if char.islower():
+            lower_count += 1
+        elif char.isupper():
+            upper_count += 1
+
+    return lower_count, upper_count
+
