@@ -22,15 +22,22 @@
 # Используйте функцию return чтобы ответ был в рублях и копейках. 
 # Ответ должен быть в формате: "Общая цена составляет M рублей и N копеек за L товаров" 
  
-# * Для одного из тестов нужно применять какую-то библиотеку =) 
  
-def common_price(m, n, s, l): 
-    if ...: 
-        return False 
- 
-    return "Общая цена составляет " + str(a) + " рублей и " + str(v) + " копеек за " + str(d) + " товаров" 
- 
- 
+def common_price(m, n, s, l):
+    price = (m * 100 + n) // s 
+    l_prise = l * price
+    rub = price // 100
+    kop = price % 100
+    return rub, kop
+
+m = int(input("Введите цену товара в рублях: "))
+n = int(input("Введите цену товара в копейках: "))
+s = int(input("Введите данное количество товара: "))
+l = int(input("Введите ваше количество товаров: "))
+
+rub, kop = common_price(m, n, s, l)
+print("Общая цена составляет", rub, "рублей и", kop, "копеек за", l, "товаров")
+
  
 # Даны: три стороны треугольника. 
 # Требуется: проверить, действительно ли это стороны треугольника. 
@@ -69,8 +76,22 @@ else:
 # Учтите что в предложении могут быть знаки препинания. 
 # Пример: если введено "This is a sample sentence where the longest word is in the middle!", 
 # то надо вернуть "sentence" 
-def longest_word(sentence): 
-    return False 
+    
+import re
+
+def longest_word(sentence):
+    words = sentence.split()
+    longest = ""
+    for word in words:
+        clean_word = re.sub(r'[^\w\s]', '', word)  # Удаляем знаки препинания
+        if len(clean_word) > len(longest):
+            longest = clean_word
+    return longest
+
+input_sentence = input("Введите предложение: ")
+result = longest_word(input_sentence)
+print("Самое длинное слово в предложении: ", result)
+
  
  
 # Вводится строка. Требуется удалить из нее повторяющиеся символы и все пробелы. 
